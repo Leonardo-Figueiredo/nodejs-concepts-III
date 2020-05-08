@@ -1,8 +1,20 @@
-// import AppError from '../errors/AppError';
+import { isUuid } from 'uuidv4';
+import { getRepository } from 'typeorm';
+
+import AppError from '../errors/AppError';
+
+import Transaction from '../models/Transaction';
 
 class DeleteTransactionService {
-  public async execute(): Promise<void> {
-    // TODO
+  public async execute(id: string): Promise<void> {
+    if (!isUuid(id)) throw new AppError('Invalid transaction ID.', 403);
+
+    const transactionRepository = getRepository(Transaction);
+    const transaction = await transactionRepository.findOne(id);
+
+    if (!transaction) throw new AppError('Invalid transaction ID.', 403);
+
+    await transactionRepository.remove(transaction);
   }
 }
 

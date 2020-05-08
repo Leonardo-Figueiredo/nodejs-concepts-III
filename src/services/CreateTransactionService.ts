@@ -29,7 +29,7 @@ class CreateTransactionService {
     const balance = await transactionRepository.getBalance();
 
     if (type === 'outcome' && balance.total < value)
-      throw new AppError('You have no balance for this transaction.', 403);
+      throw new AppError('You have no balance for this transaction.', 400);
 
     const categoryExists = await categoryRepository.findOne({
       where: {
