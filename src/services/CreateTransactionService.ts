@@ -44,6 +44,7 @@ class CreateTransactionService {
         type,
         category_id: categoryExists.id,
       } as unknown) as Transaction);
+
       await transactionRepository.save(transaction);
 
       return transaction;
@@ -54,12 +55,12 @@ class CreateTransactionService {
     });
     await categoryRepository.save(newCategory);
 
-    const transaction = transactionRepository.create(({
+    const transaction = transactionRepository.create({
       title,
       value,
       type,
-      category_id: newCategory.id,
-    } as unknown) as Transaction);
+      category: newCategory,
+    });
     await transactionRepository.save(transaction);
 
     return transaction;

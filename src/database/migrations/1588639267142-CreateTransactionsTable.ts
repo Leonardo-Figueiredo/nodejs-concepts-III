@@ -21,6 +21,8 @@ export default class CreateTransactionsTable1588639267142
           {
             name: 'value',
             type: 'numeric',
+            precision: 10,
+            scale: 2,
           },
           {
             name: 'type',
@@ -29,6 +31,7 @@ export default class CreateTransactionsTable1588639267142
           {
             name: 'category_id',
             type: 'uuid',
+            isNullable: true,
           },
           {
             name: 'created_at',
